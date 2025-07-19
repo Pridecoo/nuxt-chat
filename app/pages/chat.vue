@@ -1,3 +1,3 @@
 <template>
-  <p>This is a chat</p>
+  <ChatWindow />
 </template>
