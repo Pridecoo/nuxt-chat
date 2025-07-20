@@ -33,7 +33,7 @@ v-for="message in messages" :key="message.id" class="message" :class="{
             'message-ai' : message.role === 'assistant'
           }">
           <div class="message-content">
-            {{ message.content }}
+            <MarkdownRenderer :content="message.content"/>
           </div> 
           </div>
 
