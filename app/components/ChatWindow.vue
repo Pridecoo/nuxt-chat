@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { Chat, ChatMessage } from '~/types';
 
-  const props = defineProps<{messages: ChatMessage[], chat: Chat, typing: Boolean}>()
+  const props = defineProps<{messages: ChatMessage[], chat: Chat, typing: boolean}>()
   
   const emit = defineEmits(['send-message'])
 
@@ -27,7 +27,8 @@ import type { Chat, ChatMessage } from '~/types';
           <h1 class="title">{{ chat?.title || 'Untitled Chat' }}</h1>
         </div>
         <div class="messages-container">
-          <div v-for="message in messages" :key="message.id" class="message" :class="{
+          <div
+v-for="message in messages" :key="message.id" class="message" :class="{
             'message-user' : message.role === 'user',
             'message-ai' : message.role === 'assistant'
           }">

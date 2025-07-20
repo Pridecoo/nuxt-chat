@@ -21,5 +21,5 @@
 </script>
 
 <template>
-  <ChatWindow :typing :messages :chat @send-message="sendMessage" />
+  <ChatWindow :typing :messages :chat @send-message="handleSendMessage" />
 </template>
