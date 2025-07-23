@@ -7,5 +7,13 @@ export interface ChatMessage {
 export interface Chat {
   id: string,
   title: string,
-  messages: ChatMessage[]
+  messages: ChatMessage[],
+  projectId: string,
+  createdAt: Date,
+  updatedAt: Date
+}
+
+export interface Project {
+  id: string,
+  name: string,
 }
