@@ -2,10 +2,10 @@
 import useChats from '~/composables/useChats';
 
 const appConfig = useAppConfig()
-const {createChat} = useChats()
+const {createChatAndNavigate} = useChats()
 
-function handleCreateChat() {
-  createChat()
+async function handleCreateChat() {
+  await createChatAndNavigate()
 }
 </script>
 

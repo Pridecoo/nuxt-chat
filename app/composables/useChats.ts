@@ -6,7 +6,11 @@ export default function useChats(options: {
 } = {}) {
   const chats = useState<Chat[]>('chats', () => [MOCK_CHAT])
 
-  function createChat() {
+  function createChat(
+    options: {
+      projectId?: string
+    } = {}
+  ) {
     const id = (chats.value.length + 1).toString()
     const chat = {
       id,
@@ -22,9 +26,18 @@ export default function useChats(options: {
     return chat
   }
 
+  async function createChatAndNavigate(
+    options: {
+      projectId?: string
+    } = {}
+  ) {
+    const chat = createChat(options)
+    await navigateTo(`/chats/${chat.id}`)
+  }
+
   function chatsInProject(projectId: string) {
     return chats.value.filter((c) => c.projectId === projectId)
   }
 
-  return {chats, createChat, chatsInProject}
+  return {chats, createChat, createChatAndNavigate, chatsInProject}
 }
