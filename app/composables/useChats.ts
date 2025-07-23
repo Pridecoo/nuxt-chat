@@ -1,9 +1,7 @@
 import type {Chat} from '../types'
 import  {MOCK_CHAT} from './mockData'
 
-export default function useChats(options: {
-  projectId?: string
-} = {}) {
+export default function useChats() {
   const chats = useState<Chat[]>('chats', () => [MOCK_CHAT])
 
   function createChat(
