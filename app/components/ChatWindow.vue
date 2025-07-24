@@ -16,7 +16,7 @@ import type { Chat, ChatMessage } from '~/types';
   <div ref="scrollContainer" class="scroll-container">
     <UContainer class="chat-container">
       <div v-if="!messages?.length" class="empty-state">
-        <div class="empty-state-card">
+        <div class="empty-state-card rounded-2xl">
           <h2 class="empty-state-title">Start your chat</h2>
           <ChatInput @send-message="handleSendMessage" />
         </div>
@@ -28,7 +28,7 @@ import type { Chat, ChatMessage } from '~/types';
         </div>
         <div class="messages-container">
           <div
-v-for="message in messages" :key="message.id" class="message" :class="{
+            v-for="message in messages" :key="message.id" class="message" :class="{
             'message-user' : message.role === 'user',
             'message-ai' : message.role === 'assistant'
           }">
@@ -60,6 +60,7 @@ v-for="message in messages" :key="message.id" class="message" :class="{
   overflow-y: auto;
   height: 100%;
   box-sizing: border-box;
+  width: 100%;
 }
 
 .chat-container {

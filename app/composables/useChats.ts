@@ -12,9 +12,9 @@ export default function useChats() {
     const id = (chats.value.length + 1).toString()
     const chat = {
       id,
-      title: 'New Chat',
+      title: `Chat ${id}`,
       messages: [],
-      projectId: options.projectId || '',
+      projectId: options.projectId,
       createdAt: new Date(),
       updatedAt: new Date()
     }
