@@ -3,7 +3,7 @@
 </script>
 
 <template>
-  <MDC :value="content" class="markdown-content" ></MDC>
+  <MDC :value="content" class="markdown-content" />
 </template>
 
 <style>

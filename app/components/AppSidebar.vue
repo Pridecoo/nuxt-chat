@@ -95,7 +95,7 @@ async function handleCreateChat() {
         />
       </div>
 
-      <div v-if="olderChats.length"v class="mb-4">
+      <div v-if="olderChats.length" class="mb-4">
         <div class="flex justify-between items-center mb-2">
           <h2
             class="text-sm font-semibold text-(--ui-text-muted)"
