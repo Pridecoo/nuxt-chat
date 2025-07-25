@@ -1,4 +1,4 @@
-import type {Chat} from '../types'
+import type {Chat} from '../../../../app/types'
 import  {MOCK_CHAT} from './mockData'
 
 export default function useChats() {
@@ -30,7 +30,12 @@ export default function useChats() {
     } = {}
   ) {
     const chat = createChat(options)
+
+    if (chat.projectId) {
+      await navigateTo(`/projects/${chat.projectId}/chats/${chat.id}`)
+    } else {
     await navigateTo(`/chats/${chat.id}`)
+    }
   }
 
   function chatsInProject(projectId: string) {

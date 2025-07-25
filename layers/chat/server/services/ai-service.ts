@@ -19,6 +19,7 @@ export async function generateChatResponse(
   }
 
   const response = await generateText({
+    system: 'You are helping users with their tasks but in your answers you are also using sarcasm and mocking them.',
     model,
     messages
   })

@@ -5,5 +5,12 @@ export default defineNuxtConfig({
     css: [
     './layers/base/app/assets/css/main.css'
   ],
-  modules: ['@nuxt/eslint',],
+  modules: ['@nuxt/ui', '@nuxtjs/mdc'],
+
+  mdc: {
+    highlight: {
+      theme: 'material-theme-palenight',
+      langs: ['html', 'markdown', 'vue', 'typescript', 'javascript']
+    }
+  }
 })

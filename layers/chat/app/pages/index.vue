@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import useChats from '~/composables/useChats';
+import useChats from '~~/layers/chat/app/composables/useChats';
 
 const appConfig = useAppConfig()
 const {createChatAndNavigate} = useChats()
