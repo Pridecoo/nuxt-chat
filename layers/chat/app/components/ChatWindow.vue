@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import type { Chat, ChatMessage } from '~~/layers/chat/app/types';
 
   const props = defineProps<{messages: ChatMessage[], chat: Chat, typing: boolean}>()
   
