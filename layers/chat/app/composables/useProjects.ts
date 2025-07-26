@@ -1,5 +1,3 @@
-import type { Project } from '../../../../app/types'
-import { MOCK_PROJECT } from './mockData'
 
 export default function useProjects() {
   const projects = useState<Project[]>('projects', () => [
@@ -8,9 +6,11 @@ export default function useProjects() {
 
   function createProject() {
     const id = (projects.value.length + 1).toString()
-    const project = {
+    const project: Project = {
       id,
       name: 'New Project',
+      createdAt: new Date(),
+      updatedAt: new Date()
     }
 
     projects.value.push(project)
