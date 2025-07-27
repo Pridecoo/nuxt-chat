@@ -1,8 +1,10 @@
 <script setup lang="ts">
 
   const route = useRoute()
-  const {chat: chatFromChats, messages, sendMessage} = useChat(route.params.id as string);
+  const {chat: chatFromChats, messages, sendMessage, fetchMessages} = useChat(route.params.id as string);
   const typing = ref(false)
+
+  await fetchMessages()
 
   if (!chatFromChats.value) {
     await navigateTo('/', {replace: true})
