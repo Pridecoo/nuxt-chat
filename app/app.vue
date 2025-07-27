@@ -8,5 +8,5 @@
     <NuxtLayout>
       <NuxtPage />
     </NuxtLayout>  
-    </UApp>
+  </UApp>
 </template>
