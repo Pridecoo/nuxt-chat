@@ -55,9 +55,9 @@ watch(
       class="message-input"
       :disabled="isStreaming"
       :rows="1"
+      placeholder="Enter your message..."
       @input="adjustTextareaHeight"
       @keydown.enter.prevent="handleSendMessage"
-      placeholder="Enter your message..."
     />
     <UButton
       type="submit"

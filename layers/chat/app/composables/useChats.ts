@@ -1,6 +1,17 @@
 
 export default function useChats() {
-  const chats = useState<Chat[]>('chats', () => [MOCK_CHAT])
+  const {data: chats} = useAsyncData<Chat[]>(
+    'chats',
+    () => {
+      return $fetch<Chat[]>('/api/chats')
+    },
+    {default: () => [],}
+  )
+
+  async function fetchChats() {
+    const data = await $fetch<Chat[]>('/api/chats')
+    chats.value = data
+  }
 
   function createChat(
     options: {
@@ -40,5 +51,5 @@ export default function useChats() {
     return chats.value.filter((c) => c.projectId === projectId)
   }
 
-  return {chats, createChat, createChatAndNavigate, chatsInProject}
+  return {chats, createChat, createChatAndNavigate, chatsInProject, fetchChats}
 }
