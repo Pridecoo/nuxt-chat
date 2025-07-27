@@ -22,20 +22,20 @@ export default function useChat(chatId: string) {
     chat.value.messages = data.value
   }
 
-  function createMessage(
-    message: string,
-    role: ChatMessage['role']
-  ) {
-    const id = messages.value.length.toString()
+  // function createMessage(
+  //   message: string,
+  //   role: ChatMessage['role']
+  // ) {
+  //   const id = messages.value.length.toString()
 
-    return {
-      id,
-      role,
-      content: message,
-      createdAt: new Date(),
-      updatedAt: new Date(),
-    }
-  }
+  //   return {
+  //     id,
+  //     role,
+  //     content: message,
+  //     createdAt: new Date(),
+  //     updatedAt: new Date(),
+  //   }
+  // }
 
   async function sendMessage(message: string) {
     if (!chat.value) return
