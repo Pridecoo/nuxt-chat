@@ -20,7 +20,7 @@ export default defineNuxtConfig({
       storage: {
         db: {
           driver: 'redis',
-          url: process.env.REDIS_URL
+          url: process.env.REDIS_REDIS_URL
       }
     }
   },
