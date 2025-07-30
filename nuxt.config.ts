@@ -19,7 +19,8 @@ export default defineNuxtConfig({
     nitro: {
       storage: {
         db: {
-          driver: 'vercel-edge-config',
+          driver: 'netlify-blobs',
+          base: 'db'
       }
     }
   },
