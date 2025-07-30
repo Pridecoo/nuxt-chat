@@ -19,8 +19,8 @@ export default defineNuxtConfig({
     nitro: {
       storage: {
         db: {
-          driver: 'netlify-blobs',
-          name: 'db'
+          driver: 'redis',
+          url: process.env.REDIS_URL
       }
     }
   },
