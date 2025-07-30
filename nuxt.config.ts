@@ -15,13 +15,13 @@ export default defineNuxtConfig({
     }
   },
 
-  // $production: {
-  //   nitro: {
-  //     storage: {
-  //       db: {
-  //         driver: 'vercel-kv',
-  //     }
-  //   }
-  // },
-  // }
+  $production: {
+    nitro: {
+      storage: {
+        db: {
+          driver: 'vercel-edge-config',
+      }
+    }
+  },
+  }
 })
