@@ -6,5 +6,22 @@ export default defineNuxtConfig({
     './layers/base/app/assets/css/main.css'
   ],
   modules: ['@nuxt/eslint',],
-  
+  nitro: {
+    storage: {
+      db: {
+        driver: 'fs',
+        base: './.data'
+      }
+    }
+  },
+
+  // $production: {
+  //   nitro: {
+  //     storage: {
+  //       db: {
+  //         driver: 'vercel-kv',
+  //     }
+  //   }
+  // },
+  // }
 })
