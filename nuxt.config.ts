@@ -15,14 +15,15 @@ export default defineNuxtConfig({
     }
   },
 
-  $production: {
-    nitro: {
-      storage: {
-        db: {
-          driver: 'redis',
-          url: process.env.REDIS_REDIS_URL
-      }
-    }
-  },
-  }
+  // TODO NOT WORKING
+  // $production: {
+  //   nitro: {
+  //     storage: {
+  //       db: {
+  //         driver: 'redis',
+  //         url: process.env.REDIS_REDIS_URL
+  //     }
+  //   }
+  // },
+  // }
 })
