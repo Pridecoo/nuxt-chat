@@ -3,7 +3,7 @@ import { createOpenAIModel, generateChatResponse } from "~~/layers/chat/server/s
 
 export default defineEventHandler(async (event) => {
   const { id } = getRouterParams(event)
-  const history = getMessagesByChatId(id)
+  const history = await getMessagesByChatId(id)
   const openai = createOpenAIModel(useRuntimeConfig().openaiApiKey)
   const reply = await generateChatResponse(openai, history)
 
