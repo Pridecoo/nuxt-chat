@@ -20,7 +20,7 @@ export default defineNuxtConfig({
       storage: {
         db: {
           driver: 'netlify-blobs',
-          base: 'db'
+          name: 'db'
       }
     }
   },
