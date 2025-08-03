@@ -1,5 +1,5 @@
 import { getMessagesByChatId, createMessageForChat } from "~~/layers/chat/server/repository/chatRepository";
-import { createOpenAIModel, generateChatResponse, streamChatResponse } from "~~/layers/chat/server/services/ai-service";
+import { createOpenAIModel, streamChatResponse } from "~~/layers/chat/server/services/ai-service";
 
 export default defineEventHandler(async (event) => {
   const { id } = getRouterParams(event)
