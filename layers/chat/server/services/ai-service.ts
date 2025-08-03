@@ -1,4 +1,4 @@
-import { generateText } from "ai";
+import { generateText, streamText } from "ai";
 import { createOpenAI } from "@ai-sdk/openai";
 import type { Message, LanguageModelV1 } from "ai";
 
@@ -43,4 +43,15 @@ export async function generateChatTitle(model: LanguageModelV1, firstMessage: st
   })
 
   return response.text.trim()
+}
+
+export async function streamChatResponse(
+    model: LanguageModelV1,
+  messages: Message[]
+) {
+  if (!Array.isArray(messages) || !messages.length) {
+    throw new Error('Invalid messages format!')
+  }
+
+  return streamText({model, messages}).textStream
 }

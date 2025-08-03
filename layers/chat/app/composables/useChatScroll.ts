@@ -61,6 +61,7 @@ export default function useChatScroll() {
     if (isAtBottom.value) {
       // Force immediate scroll without animation when messages change
       if (scrollContainer.value) {
+        await new Promise((resolve) => setTimeout(resolve, 100))
         await nextTick()
         scrollContainer.value.scrollTop =
           scrollContainer.value.scrollHeight
