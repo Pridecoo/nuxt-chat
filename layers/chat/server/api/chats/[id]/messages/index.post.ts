@@ -1,14 +1,21 @@
-import { createMessageForChat } from "~~/layers/chat/server/repository/chatRepository"
+import { createMessageForChat } from '../../../../repository/chatRepository'
+import { CreateMessageSchema } from '../../../../schemas'
 
 export default defineEventHandler(async (event) => {
-  const {id} = getRouterParams(event)
-  const body = await readBody(event)
+  const { id } = getRouterParams(event)
 
-  return createMessageForChat(
-    {
-      chatId: id,
-      role: body.role,
-      content: body.content
-    }
+  const { success, data } = await readValidatedBody(
+    event,
+    CreateMessageSchema.safeParse
   )
+
+  if (!success) {
+    return 400
+  }
+
+  return createMessageForChat({
+    chatId: id,
+    content: data.content,
+    role: data.role,
+  })
 })

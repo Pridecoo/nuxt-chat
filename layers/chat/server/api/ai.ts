@@ -1,18 +1,35 @@
-import { createOpenAIModel, generateChatResponse } from "../services/ai-service"
+import {
+  createOpenAIModel,
+  generateChatResponse,
+} from '../services/ai-service'
+import { ChatMessageSchema } from '../schemas'
 
 export default defineEventHandler(async (event) => {
-  const body = await readBody(event)
-  const {messages} = body
-  const id = messages.length.toString()
-  const openaiApiKey = useRuntimeConfig().openaiApiKey
+  const { success, data } = await readValidatedBody(
+    event,
+    ChatMessageSchema.safeParse
+  )
 
+  if (!success) {
+    return 400
+  }
+
+  const { messages } = data as {
+    messages: ChatMessage[]
+    chatId: string
+  }
+
+  const openaiApiKey = useRuntimeConfig().openaiApiKey
   const openaiModel = createOpenAIModel(openaiApiKey)
 
-  const response = await generateChatResponse(openaiModel, messages)
+  const response = await generateChatResponse(
+    openaiModel,
+    messages
+  )
 
   return {
-    id,
+    id: messages.length.toString(),
     role: 'assistant',
-    content: response
+    content: response,
   }
 })

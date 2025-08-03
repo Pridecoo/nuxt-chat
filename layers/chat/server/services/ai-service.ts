@@ -33,13 +33,12 @@ export async function generateChatTitle(model: LanguageModelV1, firstMessage: st
     messages: [
       {
         role: 'system',
-        content: `Summarize me this in 3 or less short words: ${firstMessage}`
+        content: `Summarize me the first message in the chat in 3 or less short words`
       },
-      // TODO maybe will need to uncomment and fix somehow.
-      // {
-      //   role: 'user',
-      //   content: 'firstMessage'
-      // }
+      {
+        role: 'user',
+        content: firstMessage
+      }
     ]
   })
 
