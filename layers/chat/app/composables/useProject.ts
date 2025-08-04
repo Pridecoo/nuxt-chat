@@ -5,12 +5,25 @@ export default function useProject(projectId: string) {
     projects.value.find((p) => p.id === projectId)
   )
 
+  function updateProjectInList(updatedData: Partial<Project>) {
+    if (!project.value) return
+
+        // Merge with existing to update in our data store
+    projects.value = projects.value.map((p) =>
+      p.id === projectId ? { ...p, ...updatedData } : p
+    )
+  }
+
   async function updateProject(
     updatedProject: Partial<Project>
   ) {
     if (!project.value) return
 
-    const response = await $fetch<Project>(
+    const originalProject = {...project.value}
+    updateProjectInList(updatedProject)
+
+    try {
+      const response = await $fetch<Project>(
       `/api/projects/${projectId}`,
       {
         method: 'PUT',
@@ -20,10 +33,14 @@ export default function useProject(projectId: string) {
       }
     )
 
-    // Merge with existing to update in our data store
-    projects.value = projects.value.map((p) =>
-      p.id === projectId ? { ...p, ...response } : p
-    )
+    updateProjectInList(response)
+    return response
+  } catch (error) {
+    console.error('Failed to update the project', error)
+    updateProjectInList(originalProject)
+  }
+
+
   }
 
   return {

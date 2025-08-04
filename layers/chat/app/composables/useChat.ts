@@ -21,7 +21,12 @@ export default function useChat(chatId: string) {
   }: {
     refresh?: boolean
   } = {}) {
-    if ((!refresh && status.value !== 'idle') || !chat.value) return
+    const hasExistingMessages = messages.value.length > 1
+    const isRequestInProgress = status.value !== 'idle'
+    const shouldSkipDueToExistingState = !refresh && (hasExistingMessages || isRequestInProgress)
+
+    if (shouldSkipDueToExistingState || !chat.value) return
+    
     await execute()
     chat.value.messages = data.value
   }
@@ -55,6 +60,8 @@ export default function useChat(chatId: string) {
   //   }
   // }
 
+
+
   async function sendMessage(message: string) {
     if (!chat.value) return
 
@@ -62,17 +69,37 @@ export default function useChat(chatId: string) {
       generateChatTitle(message)
     }
 
-    const newMessage = await $fetch<ChatMessage>(`/api/chats/${chatId}/messages`,
-      {
-        method: 'POST',
-        body: {
-          content: message,
-          role: 'user'
-        }
-      }
-    )
+    const optimisticUserMessage: ChatMessage = {
+    id: `optimistic-user-message-${Date.now()}`,
+    role: 'user',
+    content: message,
+    createdAt: new Date(),
+    updatedAt: new Date()
+    }
 
-    messages.value.push(newMessage)
+    messages.value.push(optimisticUserMessage)
+
+    const userMessageIndex = messages.value.length - 1
+
+    try {
+      await new Promise((resolve) => setTimeout(resolve, 1000))
+      const newMessage = await $fetch<ChatMessage>(`/api/chats/${chatId}/messages`,
+        {
+          method: 'POST',
+          body: {
+            content: message,
+            role: 'user'
+          }
+        }
+      )
+
+      messages.value[userMessageIndex] = newMessage
+    } catch (error) {
+      console.error('Error sending user message', error)
+      messages.value.splice(userMessageIndex, 1)
+      return
+    }
+
     messages.value.push({
       id: `streaming-message-${Date.now()}`,
       role: 'assistant',
