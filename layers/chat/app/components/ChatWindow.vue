@@ -1,5 +1,4 @@
 <script setup lang="ts">
-
   const props = defineProps<{messages: ChatMessage[], chat: Chat, typing: boolean}>()
   
   const emit = defineEmits(['send-message'])
