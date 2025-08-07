@@ -26,6 +26,7 @@
     "zod": "^4.0.14"
   },
   "devDependencies": {
+    "@nuxt/image": "^1.11.0",
     "@nuxtjs/mdc": "^0.17.2",
     "husky": "^9.1.7"
   }

@@ -5,7 +5,7 @@ export default defineNuxtConfig({
     css: [
     './layers/base/app/assets/css/main.css'
   ],
-  modules: ['@nuxt/eslint',],
+  modules: ['@nuxt/eslint', '@nuxt/image'],
   nitro: {
     storage: {
       db: {
@@ -14,6 +14,12 @@ export default defineNuxtConfig({
       }
     }
   },
+
+  // routeRules: {
+  //   'chats/**': {
+  //     ssr: false
+  //   }
+  // }
 
   // TODO NOT WORKING
   // $production: {
