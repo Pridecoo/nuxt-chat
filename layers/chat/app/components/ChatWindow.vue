@@ -1,5 +1,7 @@
 <script setup lang="ts">
   const props = defineProps<{messages: ChatMessage[], chat: Chat, typing: boolean}>()
+
+  // throw createError('zhopa')
   
   const emit = defineEmits(['send-message'])
 
