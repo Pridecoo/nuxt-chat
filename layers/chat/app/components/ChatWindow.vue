@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  const props = defineProps<{messages: ChatMessage[], chat: Chat, typing: boolean}>()
+  const props = defineProps<{messages: Message[], chat: Chat, typing: boolean}>()
 
   // throw createError('zhopa')
   
@@ -59,7 +59,7 @@
             'message-ai' : message.role === 'assistant'
           }">
           <div class="message-content">
-            <MarkdownRenderer :content="message.content"/>
+            <MarkdownRenderer :cache-key="message.id" :content="message.content"/>
           </div> 
           </div>
 

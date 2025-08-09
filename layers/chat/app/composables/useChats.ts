@@ -23,7 +23,7 @@ export default function useChats() {
       recentChats.map(async (chat) => {
         try {
           console.log(`Prefetching ${chat.title}`)
-          const messages = await $fetch<ChatMessage[]>(`/api/chats/${chat.id}/messages`)
+          const messages = await $fetch<Message[]>(`/api/chats/${chat.id}/messages`)
 
           const targetChat = chats.value.find(c => c.id === chat.id)
           if (targetChat) {

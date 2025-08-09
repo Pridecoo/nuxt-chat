@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import ProfileMenu from '~~/layers/auth/app/components/ProfileMenu.vue';
 import useChats from '~~/layers/chat/app/composables/useChats';
 
 
@@ -25,7 +26,7 @@ function handleToggleSidebar() {
       {{ appConfig.title }}
     </div>
     <div class="header-right">
-      <!-- Nothing here yet -->
+      <ProfileMenu/>
     </div>
   </header>
 </template>

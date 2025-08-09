@@ -4,11 +4,11 @@ export default function useChat(chatId: string) {
     chats.value.find((c) => c.id === chatId)
   )
 
-  const messages = computed<ChatMessage[]>(
+  const messages = computed<Message[]>(
     () => chat.value?.messages || []
   )
 
-  const { data, execute, status } = useFetch<ChatMessage[]>(
+  const { data, execute, status } = useFetch<Message[]>(
     `/api/chats/${chatId}/messages`,
     {
       default: () => [],
@@ -47,7 +47,7 @@ export default function useChat(chatId: string) {
 
   // function createMessage(
   //   message: string,
-  //   role: ChatMessage['role']
+  //   role: Message['role']
   // ) {
   //   const id = messages.value.length.toString()
 
@@ -69,7 +69,7 @@ export default function useChat(chatId: string) {
       generateChatTitle(message)
     }
 
-    const optimisticUserMessage: ChatMessage = {
+    const optimisticUserMessage: Message = {
     id: `optimistic-user-message-${Date.now()}`,
     role: 'user',
     content: message,
@@ -83,7 +83,7 @@ export default function useChat(chatId: string) {
 
     try {
       await new Promise((resolve) => setTimeout(resolve, 1000))
-      const newMessage = await $fetch<ChatMessage>(`/api/chats/${chatId}/messages`,
+      const newMessage = await $fetch<Message>(`/api/chats/${chatId}/messages`,
         {
           method: 'POST',
           body: {
@@ -108,7 +108,7 @@ export default function useChat(chatId: string) {
       updatedAt: new Date()
     })
 
-    const lastMessage = messages.value[messages.value.length - 1] as ChatMessage
+    const lastMessage = messages.value[messages.value.length - 1] as Message
 
     try {
       const response = await $fetch<ReadableStream>(`/api/chats/${chatId}/messages/stream`,
@@ -154,7 +154,7 @@ export default function useChat(chatId: string) {
     const originalProjectId = chat.value.projectId
 
     // Optimistically update the chat
-    chat.value.projectId = projectId || undefined
+    chat.value.projectId = projectId || null
 
     try {
       const updatedChat = await $fetch<Chat>(`/api/chats/${chatId}`, 
